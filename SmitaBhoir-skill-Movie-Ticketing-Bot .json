@@ -1,0 +1,854 @@
+{
+  "intents": [
+    {
+      "intent": "Book_tickets",
+      "examples": [
+        {
+          "text": "book movie ticket"
+        },
+        {
+          "text": "i would like to go to movies"
+        },
+        {
+          "text": "make movie reservation"
+        },
+        {
+          "text": "please book tickets to movie"
+        },
+        {
+          "text": "reserve some seats for movie"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Enquiry",
+      "examples": [
+        {
+          "text": "enquiry"
+        },
+        {
+          "text": "Movie list"
+        },
+        {
+          "text": "movies"
+        },
+        {
+          "text": "shows timing"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greetings",
+      "examples": [
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hey"
+        },
+        {
+          "text": "Hi"
+        },
+        {
+          "text": "Welcome to Magic Cinema Hall Movie Ticketing Bot"
+        }
+      ],
+      "description": "Type movie to watch movies available in the theather"
+    },
+    {
+      "intent": "ThankYou",
+      "examples": [
+        {
+          "text": "Great thanks"
+        },
+        {
+          "text": "Thanks"
+        },
+        {
+          "text": "Thank You"
+        },
+        {
+          "text": "thank you so much"
+        },
+        {
+          "text": "Thank you very much"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "enquiry",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "movies",
+          "synonyms": [
+            "cinemas",
+            "movielist"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "showstiming",
+          "synonyms": [
+            "movietiming"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ticketprice",
+          "synonyms": [
+            "ticketcost"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "tickets",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "timing",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "movie_name",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "3 Idiots",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Band Baja Barat",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Om Shanti Om",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "movie_time",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "1pm-4pm",
+          "synonyms": [
+            "afternoon show"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "5pm-8pm",
+          "synonyms": [
+            "evening show"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "9am-12pm",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "9pm-12am",
+          "synonyms": [
+            "Night Show"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "mumbai_cinema",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Carnival Cinema",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Horizon Cinema",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Multiplex Cinema",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "PVR Cinema",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "ticket_price",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Adult: Rs.500/-",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Child: Rs.200/-",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_3_1602505482974",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1602505311702",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1602505311761",
+      "previous_sibling": "handler_4_1602505311761"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1602505545244",
+      "context": {
+        "moviename": "@movie_name"
+      },
+      "conditions": "@movie_name",
+      "event_name": "input",
+      "dialog_node": "handler_1_1602505545302"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_4_1602505747564",
+      "context": {
+        "movielocation": "@mumbai_cinema"
+      },
+      "conditions": "@mumbai_cinema",
+      "event_name": "input",
+      "dialog_node": "handler_2_1602505747572"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Please enter booking date"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1602506291310",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1602506291321",
+      "previous_sibling": "handler_3_1602506291321"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1602506291310",
+      "context": {
+        "moviedate": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_3_1602506291321"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Please tell me for how many people should I book the ticket?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1602506367228",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1602506367236",
+      "previous_sibling": "handler_6_1602506367236"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_3_1602505311702",
+      "event_name": "input",
+      "dialog_node": "handler_4_1602505311761"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Please enter booking timing"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_2_1602506326906",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1602506326920",
+      "previous_sibling": "handler_5_1602506326920"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1602506326906",
+      "context": {
+        "movietime": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_5_1602506326920"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "The movies available (3 Idiots, Om Shanti Om, Band Baja Barat). Which movie you would like to watch?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1602505545244",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1602505545302",
+      "previous_sibling": "handler_1_1602505545302"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1602506367228",
+      "context": {
+        "seats": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_6_1602506367236"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please enter show time to watch movie\n(Morning::9am-12pm, Afternoon:1pm-4pm,Evening:5pm-8pm,Night: 9pm-12am)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_3_1602509569978",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1602509569989",
+      "previous_sibling": "handler_8_1602509569989"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Please enter the appropriate cinema"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_4_1602505747564",
+      "event_name": "focus",
+      "dialog_node": "handler_8_1602505747572",
+      "previous_sibling": "handler_2_1602505747572"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1602509569978",
+      "context": {
+        "showtime": "@movie_time"
+      },
+      "conditions": "@movie_time",
+      "event_name": "input",
+      "dialog_node": "handler_8_1602509569989"
+    },
+    {
+      "type": "standard",
+      "title": "Enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Enquiry",
+      "dialog_node": "node_10_1602324558230",
+      "previous_sibling": "node_9_1602504231186"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Greetings",
+      "dialog_node": "node_2_1602323471265",
+      "previous_sibling": "node_10_1602324558230"
+    },
+    {
+      "type": "frame",
+      "title": "MovieBookingDetails",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Dear Customer, your booking for the $moviename movie on $moviedate at $showtime for $seats people at $movielocation has been completed."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Book_tickets",
+      "dialog_node": "node_3_1602505482974",
+      "previous_sibling": "node_2_1602323471265"
+    },
+    {
+      "type": "standard",
+      "title": "Movies",
+      "output": {
+        "generic": [
+          {
+            "title": "You can watch with us",
+            "options": [
+              {
+                "label": "3 Idiots",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Om Shanti Om",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Band Baja Barat",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_10_1602324558230",
+      "conditions": "@enquiry:movies",
+      "dialog_node": "node_4_1602326775995"
+    },
+    {
+      "type": "standard",
+      "title": "ThankYou",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you for visiting Multiplex Movie Ticketing Bot"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#ThankYou",
+      "dialog_node": "node_9_1602504231186",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Welcome to Multiplex Cinema  Movie Ticketing Bot...\nHow can I help you? \nI can book movie ticket for you....\nDo you wish to do enquiry about movie then write enquiry  and if you wish to book movie tickets then type  book tickets..."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1602323471265",
+      "dialog_node": "response_1_1602505345737"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "",
+            "options": [
+              {
+                "label": "9am-12pm",
+                "value": {
+                  "input": {
+                    "text": "Morning Show"
+                  }
+                }
+              },
+              {
+                "label": "1pm-4pm",
+                "value": {
+                  "input": {
+                    "text": "Afternoon Show"
+                  }
+                }
+              },
+              {
+                "label": "5pm-8pm",
+                "value": {
+                  "input": {
+                    "text": "Evening Show"
+                  }
+                }
+              },
+              {
+                "label": "9pm-12am",
+                "value": {
+                  "input": {
+                    "text": "Night Show"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_10_1602324558230",
+      "conditions": "@enquiry:timing",
+      "dialog_node": "response_5_1602502260109",
+      "previous_sibling": "response_9_1602502176651"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Welcome to Movie Enquiry.... How can I help you?\nDo you wish to see list of movies available...Please type  movies to watch movie list and further to see show timing to watch movie timing and ticket price to know price details...."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1602324558230",
+      "dialog_node": "response_5_1602516070938",
+      "previous_sibling": "response_5_1602502260109"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "Recent Movie Shows",
+            "options": [
+              {
+                "label": "3 Idiots",
+                "value": {
+                  "input": {
+                    "text": "1"
+                  }
+                }
+              },
+              {
+                "label": "Om Shanti Om",
+                "value": {
+                  "input": {
+                    "text": "2"
+                  }
+                }
+              },
+              {
+                "label": "Band Baja Barat",
+                "value": {
+                  "input": {
+                    "text": "3"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          },
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1602324558230",
+      "conditions": "@enquiry:movies",
+      "dialog_node": "response_7_1602324659524",
+      "previous_sibling": "node_4_1602326775995"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "title": "",
+            "options": [
+              {
+                "label": "9am-12pm",
+                "value": {
+                  "input": {
+                    "text": "Morning Show"
+                  }
+                }
+              },
+              {
+                "label": "1pm-4pm",
+                "value": {
+                  "input": {
+                    "text": "Afternoon Show"
+                  }
+                }
+              },
+              {
+                "label": "5pm-8pm",
+                "value": {
+                  "input": {
+                    "text": "Evening Show"
+                  }
+                }
+              },
+              {
+                "label": "9pm-12am",
+                "value": {
+                  "input": {
+                    "text": "Night Show"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_10_1602324558230",
+      "conditions": "@enquiry:showstiming",
+      "dialog_node": "response_9_1602502176651",
+      "previous_sibling": "response_7_1602324659524"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Welcome to Multiplex Movie Cinema Ticketing Bot- Developed by Smita Bhoir"
+              },
+              {
+                "text": "How can I help you? I can book ticket for you...."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "dialog_node": "response_9_1602505310791",
+      "previous_sibling": "slot_3_1602505311702"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$seats",
+      "dialog_node": "slot_1_1602506367228",
+      "previous_sibling": "slot_3_1602509569978"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$movietime",
+      "dialog_node": "slot_2_1602506326906",
+      "previous_sibling": "slot_5_1602506291310"
+    },
+    {
+      "type": "slot",
+      "parent": "Welcome",
+      "dialog_node": "slot_3_1602505311702"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$showtime",
+      "dialog_node": "slot_3_1602509569978",
+      "previous_sibling": "slot_4_1602505747564"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$movielocation",
+      "dialog_node": "slot_4_1602505747564",
+      "previous_sibling": "slot_5_1602505545244"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$moviename",
+      "dialog_node": "slot_5_1602505545244"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1602505482974",
+      "variable": "$moviedate",
+      "dialog_node": "slot_5_1602506291310",
+      "previous_sibling": "slot_1_1602506367228"
+    },
+    {
+      "type": "frame",
+      "title": "Welcome",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Movie Ticketing Bot",
+  "language": "en",
+  "description": "Movie Ticketing Bot-Prepared by Prof.Prita Patil"
+}
